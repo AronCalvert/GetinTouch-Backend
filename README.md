@@ -6,7 +6,7 @@ Visit the [wiki page](https://github.com/AronCalvert/CS4135-Software-Architectur
 Get In Touch is a project created for CS4135 Software Architecture in the University of Limerick. We created it with the aim to make it easier for students to contact people in the university, such as lecturers, staff, and student officers. This repository includes the frontend app and backend server, visit the [frontend wiki](https://github.com/AronCalvert/CS4135-Software-Architecture/wiki/Frontend-Documentation) and [backend wiki](https://github.com/AronCalvert/CS4135-Software-Architecture/wiki/Backend-Documentation) pages to find out more!
 
 ## Contributors
-| Name | Contributions |
+| Name | Roles |
 |----|----| 
 [Aron Calvert](https://github.com/AronCalvert) | Backend
 [Leo O'Shea](https://github.com/VenturiVen) | Frontend, Wiki

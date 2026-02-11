@@ -17,9 +17,15 @@ Raid Mouras | Frontend
 ## Pre-Requisites
 [To-Do]
 
-## Run Backend Server
+## Rebuild JAR file
 1. Change terminal directory to /CS4135-Software-Architecture/Backend
-2. run 'mvn spring-boot:run'
+2. run 'mvn clean package -DskipTests'
+
+Note: Requires Java 25 installed locally
+
+## Run Backend servers (Spring app + Postgres)
+1. Ensure you are in root directory
+2. run 'docker compose up'
 
 ## Run Frontend Application
 1. Change terminal directory to \CS4135-Software-Architecture\Frontend

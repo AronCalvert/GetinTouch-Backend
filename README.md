@@ -18,7 +18,8 @@ Raid Mouras | Frontend
 [To-Do]
 
 ## Run Backend Server
-[To-Do]
+1. Change terminal directory to /CS4135-Software-Architecture/Backend
+2. run 'mvn spring-boot:run'
 
 ## Run Frontend Application
 1. Change terminal directory to \CS4135-Software-Architecture\Frontend

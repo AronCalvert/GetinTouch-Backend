@@ -1,10 +1,10 @@
-package com.cs4135.getintouch;
+package com.cs4135.Backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GetintouchApplicationTests {
+class BackendApplicationTests {
 
 	@Test
 	void contextLoads() {

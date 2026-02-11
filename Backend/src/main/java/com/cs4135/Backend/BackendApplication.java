@@ -1,13 +1,13 @@
-package com.cs4135.getintouch;
+package com.cs4135.Backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GetintouchApplication {
+public class BackendApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GetintouchApplication.class, args);
+		SpringApplication.run(BackendApplication.class, args);
 	}
 
 }

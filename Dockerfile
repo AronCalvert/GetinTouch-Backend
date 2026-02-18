@@ -1,5 +1,4 @@
 FROM eclipse-temurin:25
-WORKDIR /Backend
 COPY target/Backend-0.0.1-SNAPSHOT.jar /app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]

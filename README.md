@@ -1,4 +1,4 @@
-# CS4135 Software Architecture Project: Get In Touch
+# CS4135 Software Architecture Project: Get In Touch - Backend
 
 Visit the [wiki page](https://github.com/AronCalvert/CS4135-Software-Architecture/wiki) to see documentation.
 

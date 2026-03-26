@@ -19,7 +19,6 @@ Get In Touch is a project created for CS4135 Software Architecture in the Univer
 [Raid Mouras](https://github.com/RaidMouras) | Frontend
 
 ## Pre-Requisites
-
 [To-Do]
 
 ## Rebuild JAR file

@@ -6,16 +6,20 @@ import com.cs4135.Backend.service.StaffService;
 import lombok.RequiredArgsConstructor;
 
 import com.cs4135.Backend.mapper.StaffMapper;
+
+import org.springframework.stereotype.Service;
+
 import com.cs4135.Backend.dto.request.CreateStaffRequestDTO;
 import com.cs4135.Backend.dto.response.StaffResponseDTO;
 import com.cs4135.Backend.entity.Staff;
 import com.cs4135.Backend.security.AppPasswordEncoder;
 
+@Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService {
-  private StaffRepository staffRepository;
-  private StaffMapper staffMapper;
-  private AppPasswordEncoder encoder;
+  private final StaffRepository staffRepository;
+  private final StaffMapper staffMapper;
+  private final AppPasswordEncoder encoder;
 
   public StaffResponseDTO createStaff(CreateStaffRequestDTO dto) {
     String hashedPassword = encoder.encode(dto.getPassword());

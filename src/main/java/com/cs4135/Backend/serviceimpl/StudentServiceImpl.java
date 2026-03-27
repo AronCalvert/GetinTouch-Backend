@@ -7,16 +7,20 @@ import lombok.RequiredArgsConstructor;
 import com.cs4135.Backend.dto.response.StudentResponseDTO;
 import com.cs4135.Backend.entity.Student;
 import com.cs4135.Backend.repository.StudentRepository;
+
+import org.springframework.stereotype.Service;
+
 import com.cs4135.Backend.dto.request.CreateStudentRequestDTO;
 import com.cs4135.Backend.mapper.StudentMapper;
 import com.cs4135.Backend.security.AppPasswordEncoder;
 
+@Service
 @RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
 
-  private StudentRepository studentRepository;
-  private StudentMapper studentMapper;
-  private AppPasswordEncoder encoder;
+  private final StudentRepository studentRepository;
+  private final StudentMapper studentMapper;
+  private final AppPasswordEncoder encoder;
 
   public StudentResponseDTO createStudent(CreateStudentRequestDTO dto) {
     String hashedPassword = encoder.encode(dto.getPassword());

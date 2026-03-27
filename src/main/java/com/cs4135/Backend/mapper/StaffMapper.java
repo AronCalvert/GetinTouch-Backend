@@ -1,9 +1,12 @@
 package com.cs4135.Backend.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.cs4135.Backend.dto.request.CreateStaffRequestDTO;
 import com.cs4135.Backend.dto.response.StaffResponseDTO;
 import com.cs4135.Backend.entity.Staff;
 
+@Component
 public class StaffMapper {
 
   public Staff toStaffEntity(CreateStaffRequestDTO dto, String hashedPassword) {

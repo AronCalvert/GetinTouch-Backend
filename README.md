@@ -21,13 +21,6 @@ Get In Touch is a project created for CS4135 Software Architecture in the Univer
 ## Pre-Requisites
 [To-Do]
 
-## Rebuild JAR file
-
-1. Change terminal directory to /CS4135-Software-Architecture/Backend
-2. run 'mvn clean package -DskipTests'
-
-Note: Requires Java 25 installed locally
-
 ## Run Backend servers (Spring app + Postgres)
 
 1. Ensure you are in root directory

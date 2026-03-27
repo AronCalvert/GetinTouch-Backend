@@ -1,9 +1,12 @@
 package com.cs4135.Backend.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.cs4135.Backend.dto.request.CreateStudentRequestDTO;
 import com.cs4135.Backend.dto.response.StudentResponseDTO;
 import com.cs4135.Backend.entity.Student;
 
+@Component
 public class StudentMapper {
   public Student toStudentEntity(CreateStudentRequestDTO dto, String hashedPassword) {
     Student student = new Student();

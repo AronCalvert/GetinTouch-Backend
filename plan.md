@@ -113,7 +113,6 @@ Used when registering a new user.
 - name
 - email
 - password
-- role_id
 
 ### UserResponseDTO
 

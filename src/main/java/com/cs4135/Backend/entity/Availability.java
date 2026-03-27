@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.List;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 
@@ -36,5 +37,5 @@ public class Availability {
   private LocalTime endTime;
 
   @OneToMany(mappedBy = "availability", cascade = CascadeType.ALL, orphanRemoval = true)
-  private ArrayList<TimeSlot> timeslots = new ArrayList<>();
+  private List<TimeSlot> timeslots = new ArrayList<>();
 }

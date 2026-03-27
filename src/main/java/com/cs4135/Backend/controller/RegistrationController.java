@@ -1,5 +1,7 @@
 package com.cs4135.Backend.controller;
 
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +16,11 @@ import com.cs4135.Backend.dto.response.StudentResponseDTO;
 
 @RestController
 @RequestMapping("/register")
+@RequiredArgsConstructor
 public class RegistrationController {
 
-  StudentService studentService;
-  StaffService staffService;
-
-  public RegistrationController(StudentService studentService, StaffService staffService) {
-    this.studentService = studentService;
-    this.staffService = staffService;
-  }
+  private final StudentService studentService;
+  private final StaffService staffService;
 
   @PostMapping("/students")
   public StudentResponseDTO registerStudent(@RequestBody CreateStudentRequestDTO dto) {

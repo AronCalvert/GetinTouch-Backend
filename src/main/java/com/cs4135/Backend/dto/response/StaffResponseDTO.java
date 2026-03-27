@@ -1,28 +1,15 @@
 package com.cs4135.Backend.dto.response;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 @Getter
+@RequiredArgsConstructor
 public class StaffResponseDTO {
-  private Long id;
-  private String name;
-  private String email;
-  private String officeLocation;
-  private String title;
-  private String department;
-
-  public StaffResponseDTO(
-      Long id,
-      String name,
-      String email,
-      String officeLocation,
-      String title,
-      String department) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.officeLocation = officeLocation;
-    this.title = title;
-    this.department = department;
-  }
+  private final Long id;
+  private final String name;
+  private final String email;
+  private final String officeLocation;
+  private final String title;
+  private final String department;
 }

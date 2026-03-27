@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.List;
 import java.util.ArrayList;
 
 @Entity
@@ -17,5 +18,5 @@ public class Staff extends User {
   private String officeLocation;
 
   @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
-  private ArrayList<Availability> availabilities = new ArrayList<>();
+  private List<Availability> availabilities = new ArrayList<>();
 }

@@ -1,6 +1,6 @@
 package com.cs4135.Backend.entity;
 
-import com.cs4135.Backend.entity.enums.Status;
+import com.cs4135.Backend.enums.Status;
 import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 

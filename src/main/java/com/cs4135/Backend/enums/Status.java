@@ -1,4 +1,4 @@
-package com.cs4135.Backend.entity.enums;
+package com.cs4135.Backend.enums;
 
 public enum Status {
   SCHEDULED,

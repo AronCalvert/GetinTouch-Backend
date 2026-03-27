@@ -117,7 +117,7 @@ Used when registering a new user.
 
 ### UserResponseDTO
 
- when sending user data back to the client.
+ When sending user data back to the client.
 
 - id
 - name

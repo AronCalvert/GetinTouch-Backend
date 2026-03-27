@@ -29,7 +29,7 @@ public class User {
   @Column(unique = true)
   private String email;
 
-  private String password; // Only stores hashed passwords
+  private String hashedPassword;
 
   @CreationTimestamp
   private LocalDateTime createdAt;

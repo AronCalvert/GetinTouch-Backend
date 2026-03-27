@@ -4,7 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.cs4135.Backend.entity.Meeting;
 import com.cs4135.Backend.entity.Staff;
-import com.cs4135.Backend.entity.enums.Status;
+import com.cs4135.Backend.enums.Status;
 
 import java.util.List;
 

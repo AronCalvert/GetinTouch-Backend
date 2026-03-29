@@ -14,8 +14,8 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -31,7 +31,7 @@ public class Availability {
   private Staff staff;
 
   @Enumerated(EnumType.STRING)
-  private DayOfWeek dayOfWeek;
+  private Date date;
 
   private LocalTime startTime;
   private LocalTime endTime;

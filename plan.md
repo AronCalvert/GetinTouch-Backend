@@ -278,6 +278,7 @@ Handles JWT authentication using Spring Security. password hashing etc
     POST   /login                          # Authenticate user, return JWT
     POST   /register/student
     POST   /register/staff               
+    POST   /register/admin
 
   /users
     GET    /                               # Get all users        [ADMIN]

@@ -3,9 +3,12 @@ package com.cs4135.Backend.controller;
 import com.cs4135.Backend.dto.response.LoginResponseDTO;
 import com.cs4135.Backend.dto.request.UserLoginRequestDTO;
 import com.cs4135.Backend.dto.request.CreateStudentRequestDTO;
+import com.cs4135.Backend.dto.request.CreateAdminRequestDTO;
 import com.cs4135.Backend.dto.request.CreateStaffRequestDTO;
 import com.cs4135.Backend.dto.response.StudentResponseDTO;
 import com.cs4135.Backend.dto.response.StaffResponseDTO;
+import com.cs4135.Backend.dto.response.AdminResponseDTO;
+import com.cs4135.Backend.service.AdminService;
 import com.cs4135.Backend.service.AuthenticationService;
 import com.cs4135.Backend.service.StaffService;
 import com.cs4135.Backend.service.StudentService;
@@ -21,6 +24,7 @@ public class AuthController {
   private final AuthenticationService authenticationService;
   private final StaffService staffService;
   private final StudentService studentService;
+  private final AdminService adminService;
 
   @PostMapping("/login")
   public ResponseEntity<LoginResponseDTO> login(@RequestBody UserLoginRequestDTO dto) {
@@ -38,5 +42,11 @@ public class AuthController {
   public ResponseEntity<String> registerStaff(@RequestBody CreateStaffRequestDTO dto) {
     StaffResponseDTO staffResponseDTO = staffService.createStaff(dto);
     return ResponseEntity.ok("Staff registered with email: " + staffResponseDTO);
+  }
+
+  @PostMapping("/register/admin")
+  public ResponseEntity<String> registerAdmin(@RequestBody CreateAdminRequestDTO dto) {
+    AdminResponseDTO adminResponseDTO = adminService.createAdmin(dto);
+    return ResponseEntity.ok("Admin registered with email: " + adminResponseDTO);
   }
 }

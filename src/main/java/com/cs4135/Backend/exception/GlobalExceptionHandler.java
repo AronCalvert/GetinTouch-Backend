@@ -11,6 +11,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<String> handleException(Exception ex) {
+    ex.printStackTrace(); // will print full stack trace to console
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        .body(ex.getClass().getName() + ": " + ex.getMessage());
+  }
+
   @ExceptionHandler(BadCredentialsException.class)
   public ResponseEntity<String> handleBadCredentials(BadCredentialsException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -21,11 +28,5 @@ public class GlobalExceptionHandler {
   public ResponseEntity<String> handleAuthException(AuthenticationException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
         .body("Authentication failed");
-  }
-
-  @ExceptionHandler(Exception.class)
-  public ResponseEntity<String> handleException(Exception ex) {
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body("Something went wrong");
   }
 }

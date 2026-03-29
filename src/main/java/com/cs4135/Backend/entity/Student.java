@@ -13,4 +13,9 @@ public class Student extends User {
   private String course;
   private int year;
   private String department;
+
+  @Override
+  public String getRole() {
+    return "ROLE_STUDENT";
+  }
 }

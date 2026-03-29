@@ -8,6 +8,7 @@ import com.cs4135.Backend.entity.Student;
 
 @Component
 public class StudentMapper {
+
   public Student toStudentEntity(CreateStudentRequestDTO dto, String hashedPassword) {
     Student student = new Student();
     student.setName(dto.getName());

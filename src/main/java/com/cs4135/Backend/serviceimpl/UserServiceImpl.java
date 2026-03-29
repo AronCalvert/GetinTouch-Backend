@@ -8,8 +8,12 @@ import java.util.List;
 import com.cs4135.Backend.entity.User;
 
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
 import com.cs4135.Backend.mapper.UserMapper;
 
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 

@@ -19,4 +19,9 @@ public class Staff extends User {
 
   @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Availability> availabilities = new ArrayList<>();
+
+  @Override
+  public String getRole() {
+    return "ROLE_STAFF";
+  }
 }

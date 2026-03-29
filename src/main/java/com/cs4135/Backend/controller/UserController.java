@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.cs4135.Backend.service.UserService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.cs4135.Backend.dto.response.UserResponseDTO;
 
 @RestController
 @RequestMapping("/user")
+@RequiredArgsConstructor
 public class UserController {
 
-  UserService userService;
+  private final UserService userService;
 
   @PreAuthorize("hasRole('ADMIN')")
   @GetMapping("/")

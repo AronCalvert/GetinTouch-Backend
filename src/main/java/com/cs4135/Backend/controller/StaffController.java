@@ -30,7 +30,7 @@ public class StaffController {
   }
 
   @PreAuthorize("isAuthenticated()")
-  @GetMapping("/{id}")
+  @GetMapping("/id/{id}")
   public ResponseEntity<StaffResponseDTO> getUserById(@PathVariable Long id) {
     return ResponseEntity.ok(staffService.getStaffById(id));
   }
@@ -41,7 +41,7 @@ public class StaffController {
     return ResponseEntity.ok(staffService.getStaffForStudentDepartment(authentication.getName()));
   }
 
-  @GetMapping("/{department}")
+  @GetMapping("/department/{department}")
   @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
   public ResponseEntity<List<StaffResponseDTO>> getDepartmentStaff(@PathVariable String department) {
     return ResponseEntity.ok(staffService.getStaffForDepartment(department));

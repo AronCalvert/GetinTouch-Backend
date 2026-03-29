@@ -33,20 +33,20 @@ public class AuthController {
   }
 
   @PostMapping("/register/student")
-  public ResponseEntity<String> registerStudent(@RequestBody CreateStudentRequestDTO dto) {
+  public ResponseEntity<StudentResponseDTO> registerStudent(@RequestBody CreateStudentRequestDTO dto) {
     StudentResponseDTO studentResponseDTO = studentService.createStudent(dto);
-    return ResponseEntity.ok("Student registered with email: " + studentResponseDTO);
+    return ResponseEntity.ok(studentResponseDTO);
   }
 
   @PostMapping("/register/staff")
-  public ResponseEntity<String> registerStaff(@RequestBody CreateStaffRequestDTO dto) {
+  public ResponseEntity<StaffResponseDTO> registerStaff(@RequestBody CreateStaffRequestDTO dto) {
     StaffResponseDTO staffResponseDTO = staffService.createStaff(dto);
-    return ResponseEntity.ok("Staff registered with email: " + staffResponseDTO);
+    return ResponseEntity.ok(staffResponseDTO);
   }
 
   @PostMapping("/register/admin")
-  public ResponseEntity<String> registerAdmin(@RequestBody CreateAdminRequestDTO dto) {
+  public ResponseEntity<AdminResponseDTO> registerAdmin(@RequestBody CreateAdminRequestDTO dto) {
     AdminResponseDTO adminResponseDTO = adminService.createAdmin(dto);
-    return ResponseEntity.ok("Admin registered with email: " + adminResponseDTO);
+    return ResponseEntity.ok(adminResponseDTO);
   }
 }

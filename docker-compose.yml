@@ -1,4 +1,22 @@
 
+# build and start all services
+#   docker compose up --build
+
+# build only the images
+#   docker compose build
+
+# start all services
+#   docker compose up
+
+# stop all services
+#   docker compose down
+
+# add --profile dev to also affect pgAdmin4 container
+# (see below)
+
+# Volumes are files that would not regularly be included in the image
+# But are needed for the app to run
+
 services:
   postgres:
     image: postgres:15
@@ -26,6 +44,18 @@ services:
       SPRING_DATASOURCE_PASSWORD: mypassword
     depends_on:
       - postgres
+    networks:
+      - backend-network
+  
+  frontend:
+    build:
+      context: ../GetInTouch-Frontend
+      dockerfile: Dockerfile
+    container_name: react_app
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
     networks:
       - backend-network
 

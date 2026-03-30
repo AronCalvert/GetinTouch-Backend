@@ -1,9 +1,8 @@
 package com.cs4135.Backend.dto.request;
 
 import java.time.LocalTime;
-import java.util.Date;
-
-import com.cs4135.Backend.entity.Staff;
+import java.time.Duration;
+import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +11,8 @@ import lombok.Setter;
 @Setter
 public class AvailabilityCreationRequestDTO {
   private long staffId;
-  private Date date;
+  private LocalDate date;
   private LocalTime startTime;
   private LocalTime endTime;
+  private Duration timeSlotLength;
 }

@@ -2,8 +2,6 @@ package com.cs4135.Backend.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -12,10 +10,10 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -30,8 +28,7 @@ public class Availability {
   @JoinColumn(name = "staff_id", nullable = false)
   private Staff staff;
 
-  @Enumerated(EnumType.STRING)
-  private Date date;
+  private LocalDate date;
 
   private LocalTime startTime;
   private LocalTime endTime;

@@ -10,7 +10,7 @@ import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class Availability {
   @JoinColumn(name = "staff_id", nullable = false)
   private Staff staff;
 
-  private LocalDate date;
+  private DayOfWeek day;
 
   private LocalTime startTime;
   private LocalTime endTime;

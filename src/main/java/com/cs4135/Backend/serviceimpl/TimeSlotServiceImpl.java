@@ -1,28 +1,28 @@
 package com.cs4135.Backend.serviceimpl;
 
-import java.time.DateTimeException;
+import java.time.DayOfWeek;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
+
+// In progress
 
 import com.cs4135.Backend.dto.request.AvailabilityCreationRequestDTO;
 import com.cs4135.Backend.entity.TimeSlot;
 
 public class TimeSlotServiceImpl {
-  public ArrayList<TimeSlot> generateTimeSlots(AvailabilityCreationRequestDTO dto) {
+  public ArrayList<TimeSlot> generateTimeSlotsForWindow(AvailabilityCreationRequestDTO dto) {
     ArrayList<TimeSlot> timeSlots = new ArrayList<>();
     LocalTime startTime = dto.getStartTime();
     LocalTime endTime = dto.getEndTime();
-    LocalDate date = dto.getDate();
+    DayOfWeek day = dto.getDay();
     Duration timeSlotLength = dto.getTimeSlotLength();
 
     Duration availabilityLength = Duration.between(startTime, endTime);
     int numOfTimeSlots = (int) availabilityLength.dividedBy(timeSlotLength);
 
     if (endTime.isAfter(startTime)) {
-      for (curTime = startTime; curTime.isBefore(endTime); curTime += timeSlotLength) {
+      for (LocalTime curTime = startTime; curTime.isBefore(endTime); curTime = curTime.plus(timeSlotLength)) {
 
       }
     }

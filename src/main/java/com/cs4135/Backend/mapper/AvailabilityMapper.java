@@ -13,7 +13,7 @@ public class AvailabilityMapper {
     Availability availability = new Availability();
 
     availability.setStaff(staff);
-    availability.setDate(dto.getDate());
+    availability.setDay(dto.getDay());
     availability.setStartTime(dto.getStartTime());
     availability.setEndTime(dto.getEndTime());
     return availability;
@@ -22,7 +22,7 @@ public class AvailabilityMapper {
   public AvailabilityResponseDTO toAvailabilityDTO(Availability entity, long staffId) {
     return new AvailabilityResponseDTO(
         staffId,
-        entity.getDate(),
+        entity.getDay(),
         entity.getStartTime(),
         entity.getEndTime());
   }

@@ -1,6 +1,6 @@
 package com.cs4135.Backend.dto.response;
 
-import java.time.LocalDate;
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AvailabilityResponseDTO {
   private final long staffId;
-  private final LocalDate date;
+  private final DayOfWeek day;
   private final LocalTime startTime;
   private final LocalTime endTime;
 }

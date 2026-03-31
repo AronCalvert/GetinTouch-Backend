@@ -26,5 +26,7 @@ public class TimeSlotServiceImpl {
 
       }
     }
+
+    return null;
   }
 }

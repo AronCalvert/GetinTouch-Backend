@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface MeetingRepository extends CrudRepository<Meeting, Long> {
   List<Meeting> findByStaffAndStatus(Staff staff, Status status);
+  List<Meeting> findByStudentId(Long studentId);
+  List<Meeting> findByStaffId(Long staffId);
 }

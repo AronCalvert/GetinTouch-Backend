@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class AvailabilityResponseDTO {
+  private final long id;
   private final long staffId;
   private final DayOfWeek day;
   private final LocalTime startTime;

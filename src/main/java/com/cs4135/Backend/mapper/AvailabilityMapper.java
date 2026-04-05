@@ -29,6 +29,7 @@ public class AvailabilityMapper {
 
 
     return new AvailabilityResponseDTO(
+        entity.getId(),
         staffId,
         entity.getDay(),
         entity.getStartTime(),

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public class TimeSlotResponseDTO {
+    private final long id;
     private final long availabilityId;
     private final LocalDateTime startTime;
     private final LocalDateTime endTime;

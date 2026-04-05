@@ -1,6 +1,5 @@
 package com.cs4135.Backend.serviceimpl;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,9 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         .orElseThrow(() -> new RuntimeException("Staff not found"));//none found throw error
       Availability saved = null;
       ArrayList<TimeSlot> allGenSlots = new ArrayList<>();  
+      if (date.getDayOfWeek() != dto.getDay()) {
+        throw new RuntimeException("Start date " + date + " does not fall on " + dto.getDay());
+      }
       for(LocalDate curDate = date;!curDate.isAfter(dto.getEndDate());curDate = curDate.plusDays(7)){
         Availability entity = availabilityMapper.toAvailabilityEntity(dto, staff);//Uses mapper to construct Availability out of the DTO and staff entity
         saved = availabilityRepository.save(entity);//saves it to the database 
@@ -71,8 +73,11 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   }
 
   public void deleteAvailability(long id) {
-    if(!availabilityRepository.existsById(id)) {
-      throw new RuntimeException("Availability not found with this id "+ id);
+    Availability availability = availabilityRepository.findById(id)
+      .orElseThrow(() -> new RuntimeException("Availability not found with this id " + id));
+    boolean hasBookedSlots = availability.getTimeslots().stream().anyMatch(TimeSlot::isBooked);
+    if (hasBookedSlots) {
+      throw new RuntimeException("Cannot delete availability with booked timeslots");
     }
     availabilityRepository.deleteById(id);
   }
@@ -87,10 +92,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     availability.setEndTime(dto.getEndTime());
     availability.setEndDate(dto.getEndDate());
 
+    LocalDate existingDate = availability.getTimeslots().isEmpty()
+      ? LocalDate.now()
+      : availability.getTimeslots().get(0).getStartTime().toLocalDate();
+
     availability.getTimeslots().clear();
 
-    timeSlotServiceImpl.generateTimeSlotsForWindow(dto, availability, LocalDate.now());
-    
+    timeSlotServiceImpl.generateTimeSlotsForWindow(dto, availability, existingDate);
+
     Availability saved = availabilityRepository.save(availability);
 
     return availabilityMapper.toAvailabilityDTO(saved, availability.getStaff().getId());

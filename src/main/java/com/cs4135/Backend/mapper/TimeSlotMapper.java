@@ -11,6 +11,7 @@ import com.cs4135.Backend.entity.TimeSlot;
 public class TimeSlotMapper {
     public TimeSlotResponseDTO toDto(TimeSlot entity) {
         return new TimeSlotResponseDTO(
+            entity.getId(),
             entity.getAvailability().getId(),
             entity.getStartTime(),
             entity.getEndTime(),

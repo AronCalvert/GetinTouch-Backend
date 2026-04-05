@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.type.descriptor.java.LocalDateJavaType;
 import org.springframework.stereotype.Service;
 
 // In progress
@@ -36,9 +35,6 @@ public class TimeSlotServiceImpl implements TimeSlotService{
     LocalTime endTime = availability.getEndTime();
     DayOfWeek day = availability.getDay();
     Duration timeSlotLength = dto.getTimeSlotLength(); // uses dto to get timeslotlength
-
-    Duration availabilityLength = Duration.between(startTime, endTime);//get differnce between start and end
-    int numOfTimeSlots = (int) availabilityLength.dividedBy(timeSlotLength);//gets amount of timeslots
 
     if (endTime.isAfter(startTime)) {//if end time takes place after starttime
       for (LocalTime curTime = startTime; curTime.isBefore(endTime); curTime = curTime.plus(timeSlotLength)) {//for as long as start time is before end time(increments by timeslot length so lets say 30 mins)

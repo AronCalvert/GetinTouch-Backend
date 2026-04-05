@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,19 +58,48 @@ public class MeetingServiceImpl implements MeetingService {
         return meetingMapper.toResponseDTO(savedMeeting);
     }
 
+    @Override
+    @Transactional
     public MeetingResponseDTO getMeetingById(long id) {
-        return null;
+        Meeting meeting = meetingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Meeting not found with ID: " + id));
+
+        return meetingMapper.toResponseDTO(meeting);
     }
 
+    @Override
+    @Transactional
     public MeetingResponseDTO updateMeetingStatus(long id, String status) {
-        return null;
+        Meeting meeting = meetingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Meeting not found with ID: " + id));
+
+        try{
+            meeting.setStatus(Status.valueOf(status.toUpperCase()));
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid status: " + status);
+        }
+
+        Meeting savedMeeting = meetingRepository.save(meeting);
+        return meetingMapper.toResponseDTO(savedMeeting);
     }
 
+    @Override
+    @Transactional
     public List<MeetingResponseDTO> getMeetingsForStudent(long studentId) {
-        return List.of();
+        List<Meeting> meetings = meetingRepository.findByStudentId(studentId);
+
+        return meetings.stream()
+                .map(meetingMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
+    @Override
+    @Transactional
     public List<MeetingResponseDTO> getMeetingsForStaff(long staffId) {
-        return List.of();
+        List<Meeting> meetings = meetingRepository.findByStaffId(staffId);
+
+        return meetings.stream()
+                .map(meetingMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 }

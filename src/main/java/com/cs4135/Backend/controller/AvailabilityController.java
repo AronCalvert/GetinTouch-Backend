@@ -23,7 +23,7 @@ import com.cs4135.Backend.service.AvailabilityService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/Availability")
+@RequestMapping("/api/Availability")
 @RequiredArgsConstructor
 public class AvailabilityController {
 

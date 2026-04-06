@@ -16,7 +16,7 @@ import com.cs4135.Backend.dto.response.StaffResponseDTO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/staff")
+@RequestMapping("/api/staff")
 @RequiredArgsConstructor
 public class StaffController {
 

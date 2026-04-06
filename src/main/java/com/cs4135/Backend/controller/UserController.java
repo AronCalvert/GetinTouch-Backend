@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import com.cs4135.Backend.dto.response.UserResponseDTO;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 @RequiredArgsConstructor
 public class UserController {
 

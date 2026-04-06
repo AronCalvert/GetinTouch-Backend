@@ -16,7 +16,7 @@ import com.cs4135.Backend.service.TimeSlotService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/timeslots")
+@RequestMapping("/api/timeslots")
 @RequiredArgsConstructor
 
 public class TimeSlotController {

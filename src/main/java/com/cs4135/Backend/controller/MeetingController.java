@@ -45,7 +45,7 @@ public class MeetingController {
         return ResponseEntity.ok(meetingService.getMeetingsForStudent(studentId));
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('STAFF')")
     @GetMapping("/staff/{staffId}")
     public ResponseEntity<List<MeetingResponseDTO>> getMeetingsForStaff(@PathVariable long staffId) {
         return ResponseEntity.ok(meetingService.getMeetingsForStaff(staffId));

@@ -2,6 +2,7 @@ package com.cs4135.Backend.controller;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,5 +33,11 @@ public class UserController {
   @GetMapping("/{id}")
   public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
     return ResponseEntity.ok(userService.getUserById(id));
+  }
+
+  @PreAuthorize("isAuthenticated()")
+  @GetMapping("/{email}")
+  public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email) {
+    return ResponseEntity.ok(userService.getUserByEmail(email));
   }
 }

@@ -32,4 +32,10 @@ public class UserServiceImpl implements UserService {
         .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     return userMapper.toUserResponseDTO(user);
   }
+
+  public UserResponseDTO getUserByEmail(String email) {
+    User user = userRepository.findByEmail(email)
+        .orElseThrow(() -> new RuntimeException("User not found with email: " + email));
+    return userMapper.toUserResponseDTO(user);
+  }
 }

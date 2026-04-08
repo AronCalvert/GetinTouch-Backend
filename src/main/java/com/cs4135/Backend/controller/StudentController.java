@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentController {
 
   @GetMapping("dashboard")
-  @PreAuthorize("hasRole('student')")
+  @PreAuthorize("hasRole('STUDENT')")
   public String dashboard() {
     return "welcome!";
   }

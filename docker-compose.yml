@@ -2,6 +2,9 @@
 # build and start all services
 #   docker compose up --build
 
+# rebuild only changes and start all services
+#   docker compose up -d
+
 # build only the images
 #   docker compose build
 
@@ -11,8 +14,8 @@
 # stop all services
 #   docker compose down
 
-# add --profile dev to also affect pgAdmin4 container
-# (see below)
+# stop all services and remove volumes (if you want a fresh postgresql database)
+#   docker compose down -v
 
 # Volumes are files that would not regularly be included in the image
 # But are needed for the app to run

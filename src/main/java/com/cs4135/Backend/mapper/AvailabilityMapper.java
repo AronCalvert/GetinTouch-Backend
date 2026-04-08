@@ -1,16 +1,11 @@
 package com.cs4135.Backend.mapper;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Component;
 
 import com.cs4135.Backend.dto.request.AvailabilityCreationRequestDTO;
 import com.cs4135.Backend.dto.response.AvailabilityResponseDTO;
-import com.cs4135.Backend.dto.response.TimeSlotResponseDTO;
 import com.cs4135.Backend.entity.Availability;
 import com.cs4135.Backend.entity.Staff;
-import com.cs4135.Backend.entity.TimeSlot;
 
 @Component
 public class AvailabilityMapper {
@@ -27,7 +22,6 @@ public class AvailabilityMapper {
 
   public AvailabilityResponseDTO toAvailabilityDTO(Availability entity, long staffId) {
 
-
     return new AvailabilityResponseDTO(
         entity.getId(),
         staffId,
@@ -36,6 +30,5 @@ public class AvailabilityMapper {
         entity.getEndTime(),
         entity.getEndDate());
   }
-
 
 }

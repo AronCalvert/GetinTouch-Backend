@@ -1,6 +1,5 @@
 package com.cs4135.Backend.serviceimpl;
 
-import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,19 +24,20 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class TimeSlotServiceImpl implements TimeSlotService{
+public class TimeSlotServiceImpl implements TimeSlotService {
   private final TimeSlotRepository timeSlotRepository;
   private final TimeSlotMapper timeSlotMapper;
-  
-  public ArrayList<TimeSlot> generateTimeSlotsForWindow(AvailabilityCreationRequestDTO dto,Availability availability, LocalDate date) {
-    ArrayList<TimeSlot> timeSlots = new ArrayList<>();//Creates array list of slots
+
+  public ArrayList<TimeSlot> generateTimeSlotsForWindow(AvailabilityCreationRequestDTO dto, Availability availability,
+      LocalDate date) {
+    ArrayList<TimeSlot> timeSlots = new ArrayList<>();// Creates array list of slots
     LocalTime startTime = availability.getStartTime();
     LocalTime endTime = availability.getEndTime();
-    DayOfWeek day = availability.getDay();
     Duration timeSlotLength = dto.getTimeSlotLength(); // uses dto to get timeslotlength
 
-    if (endTime.isAfter(startTime)) {//if end time takes place after starttime
-      for (LocalTime curTime = startTime; curTime.isBefore(endTime); curTime = curTime.plus(timeSlotLength)) {//for as long as start time is before end time(increments by timeslot length so lets say 30 mins)
+    // Iterate from startTime to endTime, incrementing by timeslot length (e.g. 30 mins)
+    if (endTime.isAfter(startTime)) {
+      for (LocalTime curTime = startTime; curTime.isBefore(endTime); curTime = curTime.plus(timeSlotLength)) {
         TimeSlot slot = new TimeSlot();
         slot.setAvailability(availability);
         slot.setStartTime(LocalDateTime.of(date, curTime));
@@ -54,10 +54,10 @@ public class TimeSlotServiceImpl implements TimeSlotService{
     List<TimeSlot> entities = timeSlotRepository.findByAvailabilityByStaffId(staffId);
     return timeSlotMapper.toDtoList(entities);
   }
+
   @Transactional
   public TimeSlotResponseDTO markSlotBooked(long slotId) {
-    TimeSlot slot = timeSlotRepository.findById(slotId).
-    orElseThrow(() -> new RuntimeException("TimeSlot not found!"));
+    TimeSlot slot = timeSlotRepository.findById(slotId).orElseThrow(() -> new RuntimeException("TimeSlot not found!"));
     slot.setBooked(true);
     TimeSlot saved = timeSlotRepository.save(slot);
     return timeSlotMapper.toDto(saved);
@@ -65,8 +65,7 @@ public class TimeSlotServiceImpl implements TimeSlotService{
 
   @Transactional
   public TimeSlotResponseDTO markSlotFree(long slotId) {
-    TimeSlot slot = timeSlotRepository.findById(slotId).
-    orElseThrow(() -> new RuntimeException("TimeSlot not Found!"));
+    TimeSlot slot = timeSlotRepository.findById(slotId).orElseThrow(() -> new RuntimeException("TimeSlot not Found!"));
     slot.setBooked(false);
     TimeSlot saved = timeSlotRepository.save(slot);
     return timeSlotMapper.toDto(saved);

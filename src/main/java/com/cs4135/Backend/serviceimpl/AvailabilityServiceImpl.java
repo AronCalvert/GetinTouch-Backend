@@ -7,7 +7,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cs4135.Backend.mapper.AvailabilityMapper;
-import com.cs4135.Backend.mapper.TimeSlotMapper;
 import com.cs4135.Backend.repository.AvailabilityRepository;
 import com.cs4135.Backend.repository.StaffRepository;
 import com.cs4135.Backend.dto.request.AvailabilityCreationRequestDTO;
@@ -19,7 +18,6 @@ import com.cs4135.Backend.service.AvailabilityService;
 
 import jakarta.transaction.Transactional;
 
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -32,32 +30,32 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   private final AvailabilityMapper availabilityMapper;
   private final StaffRepository staffRepository;
   private final TimeSlotServiceImpl timeSlotServiceImpl;
-  private final TimeSlotMapper timeSlotMapper;
+
   @Transactional
-  public List<AvailabilityResponseDTO> generateAvailability(List<AvailabilityCreationRequestDTO> dtoList,LocalDate date) {
+  public List<AvailabilityResponseDTO> generateAvailability(List<AvailabilityCreationRequestDTO> dtoList,
+      LocalDate date) {
     return generateSingleAvailability(dtoList, date);
   }
-        
 
-  public List<AvailabilityResponseDTO> generateSingleAvailability(List<AvailabilityCreationRequestDTO> dtos, LocalDate date) {
+  public List<AvailabilityResponseDTO> generateSingleAvailability(List<AvailabilityCreationRequestDTO> dtos,
+      LocalDate date) {
     List<AvailabilityResponseDTO> finalRes = new ArrayList<>();
-    for(AvailabilityCreationRequestDTO dto: dtos) {
+    for (AvailabilityCreationRequestDTO dto : dtos) {
 
-      Staff staff = staffRepository.findById(dto.getStaffId())//Creates a new staff using id in dto
-        .orElseThrow(() -> new RuntimeException("Staff not found"));//none found throw error
-      Availability saved = null;
-      ArrayList<TimeSlot> allGenSlots = new ArrayList<>();  
+      Staff staff = staffRepository.findById(dto.getStaffId())// Creates a new staff using id in dto
+          .orElseThrow(() -> new RuntimeException("Staff not found"));// none found throw error
       if (date.getDayOfWeek() != dto.getDay()) {
         throw new RuntimeException("Start date " + date + " does not fall on " + dto.getDay());
       }
-      for(LocalDate curDate = date;!curDate.isAfter(dto.getEndDate());curDate = curDate.plusDays(7)){
-        Availability entity = availabilityMapper.toAvailabilityEntity(dto, staff);//Uses mapper to construct Availability out of the DTO and staff entity
-        saved = availabilityRepository.save(entity);//saves it to the database 
-        ArrayList<TimeSlot> slots = timeSlotServiceImpl.generateTimeSlotsForWindow(dto,entity,curDate);
-        finalRes.add(availabilityMapper.toAvailabilityDTO(saved,staff.getId()));
+      for (LocalDate curDate = date; !curDate.isAfter(dto.getEndDate()); curDate = curDate.plusDays(7)) {
+        Availability entity = availabilityMapper.toAvailabilityEntity(dto, staff);// Uses mapper to construct
+                                                                                  // Availability out of the DTO and
+                                                                                  // staff entity
+        Availability saved = availabilityRepository.save(entity);// saves it to the database
+        timeSlotServiceImpl.generateTimeSlotsForWindow(dto, entity, curDate);
+        finalRes.add(availabilityMapper.toAvailabilityDTO(saved, staff.getId()));
+      }
     }
-  }
-
 
     return finalRes;
   }
@@ -65,16 +63,15 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   public List<AvailabilityResponseDTO> getAvailabilityByStaff(long staffId) {
     List<Availability> availabilities = availabilityRepository.findByStaffId(staffId);
     return availabilities.stream()
-    .map(availability -> availabilityMapper.toAvailabilityDTO(
-      availability,
-      staffId)
-    )
-      .collect(Collectors.toList());
+        .map(availability -> availabilityMapper.toAvailabilityDTO(
+            availability,
+            staffId))
+        .collect(Collectors.toList());
   }
 
   public void deleteAvailability(long id) {
     Availability availability = availabilityRepository.findById(id)
-      .orElseThrow(() -> new RuntimeException("Availability not found with this id " + id));
+        .orElseThrow(() -> new RuntimeException("Availability not found with this id " + id));
     boolean hasBookedSlots = availability.getTimeslots().stream().anyMatch(TimeSlot::isBooked);
     if (hasBookedSlots) {
       throw new RuntimeException("Cannot delete availability with booked timeslots");
@@ -85,7 +82,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   @Transactional
   public AvailabilityResponseDTO updateAvailability(long id, AvailabilityCreationRequestDTO dto) {
     Availability availability = availabilityRepository.findById(id)
-    .orElseThrow(() -> new RuntimeException("Availability not Found"));
+        .orElseThrow(() -> new RuntimeException("Availability not Found"));
 
     availability.setDay(dto.getDay());
     availability.setStartTime(dto.getStartTime());
@@ -93,8 +90,8 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     availability.setEndDate(dto.getEndDate());
 
     LocalDate existingDate = availability.getTimeslots().isEmpty()
-      ? LocalDate.now()
-      : availability.getTimeslots().get(0).getStartTime().toLocalDate();
+        ? LocalDate.now()
+        : availability.getTimeslots().get(0).getStartTime().toLocalDate();
 
     availability.getTimeslots().clear();
 

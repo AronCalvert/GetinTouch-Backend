@@ -3,7 +3,6 @@ package com.cs4135.Backend.dto.response;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

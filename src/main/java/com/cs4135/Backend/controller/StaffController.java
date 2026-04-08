@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StaffController {
 
-  public final StaffService staffService;
+  private final StaffService staffService;
 
   @PreAuthorize("isAuthenticated()")
   @GetMapping("/")

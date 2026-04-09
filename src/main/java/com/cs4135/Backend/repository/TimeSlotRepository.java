@@ -12,5 +12,8 @@ import com.cs4135.Backend.entity.TimeSlot;
 @Repository
 public interface TimeSlotRepository extends CrudRepository<TimeSlot, Long> {
   @Query("Select t from TimeSlot t where t.availability.staff.id = :staffId AND t.isBooked = false")
-  List<TimeSlot> findByAvailabilityByStaffId(@Param("staffId") long staffId);
+  List<TimeSlot> findUnbookedByStaffId(@Param("staffId") long staffId);
+
+  @Query("Select t from TimeSlot t where t.availability.staff.id = :staffId")
+  List<TimeSlot> findAllByStaffId(@Param("staffId") long staffId);
 }

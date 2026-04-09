@@ -24,7 +24,7 @@ public class TimeSlotController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/staff/{staffId}")
     public ResponseEntity<List<TimeSlotResponseDTO>> getStaffSlots(@PathVariable long staffId) {
-        return ResponseEntity.ok(timeSlotService.getAvailableTimeslots(staffId));
+        return ResponseEntity.ok(timeSlotService.getAllTimeslots(staffId));
     }
 
     @PreAuthorize("isAuthenticated()")

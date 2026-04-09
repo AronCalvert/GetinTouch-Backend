@@ -51,7 +51,12 @@ public class TimeSlotServiceImpl implements TimeSlotService {
   }
 
   public List<TimeSlotResponseDTO> getAvailableTimeslots(long staffId) {
-    List<TimeSlot> entities = timeSlotRepository.findByAvailabilityByStaffId(staffId);
+    List<TimeSlot> entities = timeSlotRepository.findUnbookedByStaffId(staffId);
+    return timeSlotMapper.toDtoList(entities);
+  }
+
+  public List<TimeSlotResponseDTO> getAllTimeslots(long staffId) {
+    List<TimeSlot> entities = timeSlotRepository.findAllByStaffId(staffId);
     return timeSlotMapper.toDtoList(entities);
   }
 

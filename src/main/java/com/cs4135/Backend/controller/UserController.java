@@ -30,13 +30,13 @@ public class UserController {
   }
 
   @PreAuthorize("hasRole('ADMIN')")
-  @GetMapping("/{id}")
+  @GetMapping("/id/{id}")
   public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
     return ResponseEntity.ok(userService.getUserById(id));
   }
 
   @PreAuthorize("isAuthenticated()")
-  @GetMapping("/{email}")
+  @GetMapping("/email/{email}")
   public ResponseEntity<UserResponseDTO> getUserByEmail(@PathVariable String email) {
     return ResponseEntity.ok(userService.getUserByEmail(email));
   }

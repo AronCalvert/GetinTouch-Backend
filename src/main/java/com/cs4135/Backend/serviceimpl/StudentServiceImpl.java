@@ -5,6 +5,7 @@ import com.cs4135.Backend.service.StudentService;
 import lombok.RequiredArgsConstructor;
 
 import com.cs4135.Backend.dto.response.StudentResponseDTO;
+import com.cs4135.Backend.entity.Staff;
 import com.cs4135.Backend.entity.Student;
 import com.cs4135.Backend.repository.StudentRepository;
 
@@ -27,5 +28,11 @@ public class StudentServiceImpl implements StudentService {
     Student student = studentMapper.toStudentEntity(dto, hashedPassword);
     Student saved = studentRepository.save(student);
     return studentMapper.toStudentDTO(saved);
+  }
+
+  public StudentResponseDTO getStudentById(long id) {
+    Student student = studentRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    return studentMapper.toStudentDTO(student);
   }
 }

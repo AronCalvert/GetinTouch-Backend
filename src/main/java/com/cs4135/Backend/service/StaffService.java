@@ -14,4 +14,6 @@ public interface StaffService {
   public List<StaffResponseDTO> getStaffForStudentDepartment(String email);
 
   public List<StaffResponseDTO> getStaffForDepartment(String department);
+
+  public StaffResponseDTO getStaffByEmail(long id);
 }

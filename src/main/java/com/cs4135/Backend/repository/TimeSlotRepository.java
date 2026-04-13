@@ -14,6 +14,6 @@ public interface TimeSlotRepository extends CrudRepository<TimeSlot, Long> {
   @Query("Select t from TimeSlot t where t.availability.staff.id = :staffId AND t.isBooked = false")
   List<TimeSlot> findUnbookedByStaffId(@Param("staffId") long staffId);
 
-  @Query("Select t from TimeSlot t where t.availability.staff.id = :staffId")
+  @Query("Select t from TimeSlot t LEFT JOIN FETCH t.meeting m LEFT JOIN FETCH m.student where t.availability.staff.id = :staffId")
   List<TimeSlot> findAllByStaffId(@Param("staffId") long staffId);
 }

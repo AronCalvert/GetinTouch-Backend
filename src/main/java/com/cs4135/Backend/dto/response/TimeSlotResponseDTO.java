@@ -13,4 +13,8 @@ public class TimeSlotResponseDTO {
   private final LocalDateTime startTime;
   private final LocalDateTime endTime;
   private final boolean isBooked;
+  private final Long studentId;
+  private final String studentName;
+  private final String studentEmail;
+  private final String note;
 }

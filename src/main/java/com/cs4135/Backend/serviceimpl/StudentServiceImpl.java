@@ -5,7 +5,6 @@ import com.cs4135.Backend.service.StudentService;
 import lombok.RequiredArgsConstructor;
 
 import com.cs4135.Backend.dto.response.StudentResponseDTO;
-import com.cs4135.Backend.entity.Staff;
 import com.cs4135.Backend.entity.Student;
 import com.cs4135.Backend.repository.StudentRepository;
 

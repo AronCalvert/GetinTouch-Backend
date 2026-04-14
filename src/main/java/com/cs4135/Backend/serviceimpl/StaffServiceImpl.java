@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import com.cs4135.Backend.dto.request.CreateStaffRequestDTO;
 import com.cs4135.Backend.dto.response.StaffResponseDTO;
-import com.cs4135.Backend.dto.response.UserResponseDTO;
 import com.cs4135.Backend.entity.Staff;
 import com.cs4135.Backend.security.AppPasswordEncoder;
 import com.cs4135.Backend.entity.Student;

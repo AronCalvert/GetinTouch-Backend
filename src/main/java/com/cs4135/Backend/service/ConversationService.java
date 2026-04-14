@@ -10,4 +10,5 @@ public interface ConversationService {
     List<ConversationResponseDTO> getConversationsForUser(String email);
     List<MessageResponseDTO> getMessages(Long conversationId);
     MessageResponseDTO sendMessage(Long conversationId, String content, String senderEmail);
+    MessageResponseDTO sendNotification(Long staffId, String studentEmail, String content);
 }

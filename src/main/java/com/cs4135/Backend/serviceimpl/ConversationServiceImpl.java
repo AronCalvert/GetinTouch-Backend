@@ -81,6 +81,31 @@ public class ConversationServiceImpl implements ConversationService {
 
     @Override
     @Transactional
+    public MessageResponseDTO sendNotification(Long staffId, String studentEmail, String content) {
+        Staff staff = staffRepository.findById(staffId)
+                .orElseThrow(() -> new EntityNotFoundException("Staff not found"));
+
+        Student student = studentRepository.findByEmail(studentEmail)
+                .orElseThrow(() -> new EntityNotFoundException("Student not found"));
+
+        Conversation conversation = conversationRepository.findByStaffAndStudent(staff, student)
+                .orElseGet(() -> {
+                    Conversation newConversation = new Conversation();
+                    newConversation.setStaff(staff);
+                    newConversation.setStudent(student);
+                    return conversationRepository.save(newConversation);
+                });
+
+        Message message = new Message();
+        message.setConversation(conversation);
+        message.setSender(student);
+        message.setContent(content);
+
+        return messageMapper.toResponseDTO(messageRepository.save(message));
+    }
+
+    @Override
+    @Transactional
     public MessageResponseDTO sendMessage(Long conversationId, String content, String senderEmail) {
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new EntityNotFoundException("Conversation not found"));

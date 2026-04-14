@@ -2,6 +2,7 @@ package com.cs4135.Backend.controller;
 
 import com.cs4135.Backend.dto.request.CreateConversationRequestDTO;
 import com.cs4135.Backend.dto.request.SendMessageRequestDTO;
+import com.cs4135.Backend.dto.request.SendNotificationRequestDTO;
 import com.cs4135.Backend.dto.response.ConversationResponseDTO;
 import com.cs4135.Backend.dto.response.MessageResponseDTO;
 import com.cs4135.Backend.service.ConversationService;
@@ -22,7 +23,6 @@ public class ConversationController {
 
     private final ConversationService conversationService;
 
-    @PreAuthorize("hasRole('STAFF')")
     @PostMapping
     public ResponseEntity<ConversationResponseDTO> createConversation(
             @Valid @RequestBody CreateConversationRequestDTO request,
@@ -36,6 +36,16 @@ public class ConversationController {
     @GetMapping
     public ResponseEntity<List<ConversationResponseDTO>> getConversations(Authentication authentication) {
         return ResponseEntity.ok(conversationService.getConversationsForUser(authentication.getName()));
+    }
+
+    @PreAuthorize("hasRole('STAFF') or hasRole('STUDENT')")
+    @PostMapping("/notify")
+    public ResponseEntity<MessageResponseDTO> sendNotification(
+            @Valid @RequestBody SendNotificationRequestDTO request,
+            Authentication authentication
+    ) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(conversationService.sendNotification(request.getStaffId(), authentication.getName(), request.getContent()));
     }
 
     @PreAuthorize("hasRole('STAFF') or hasRole('STUDENT')")

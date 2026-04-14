@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cs4135.Backend.mapper.AvailabilityMapper;
 import com.cs4135.Backend.repository.AvailabilityRepository;
+import com.cs4135.Backend.repository.MeetingRepository;
 import com.cs4135.Backend.repository.StaffRepository;
 import com.cs4135.Backend.dto.request.AvailabilityCreationRequestDTO;
 import com.cs4135.Backend.dto.response.AvailabilityResponseDTO;
@@ -30,6 +31,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   private final AvailabilityMapper availabilityMapper;
   private final StaffRepository staffRepository;
   private final TimeSlotServiceImpl timeSlotServiceImpl;
+  private final MeetingRepository meetingRepository;
 
   @Transactional
   public List<AvailabilityResponseDTO> generateAvailability(List<AvailabilityCreationRequestDTO> dtoList,
@@ -69,12 +71,14 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         .collect(Collectors.toList());
   }
 
+  @Transactional
   public void deleteAvailability(long id) {
     Availability availability = availabilityRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Availability not found with this id " + id));
-    boolean hasBookedSlots = availability.getTimeslots().stream().anyMatch(TimeSlot::isBooked);
-    if (hasBookedSlots) {
-      throw new RuntimeException("Cannot delete availability with booked timeslots");
+    for (TimeSlot slot : availability.getTimeslots()) {
+      if (slot.getMeeting() != null) {
+        meetingRepository.delete(slot.getMeeting());
+      }
     }
     availabilityRepository.deleteById(id);
   }

@@ -10,4 +10,6 @@ public interface UserService {
   public UserResponseDTO getUserById(Long id);
 
   public UserResponseDTO getUserByEmail(String email);
+
+  public void deleteUser(Long id);
 }

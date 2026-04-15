@@ -28,6 +28,7 @@ Get In Touch is a project created for CS4135 Software Architecture in the Univer
 3. Change terminal directory to /GetInTouch-Backend (e.g., run: cd GetInTouch-Backend)
 4. In this directory, run 'docker compose up --build'
 5. After completion, project will have been built, the project container and images should be running inside Docker
+6. frontend can then be accessed at http://localhost:3000
 
 ## Run Backend servers (Spring app + Postgres)
 1. Ensure you are in root directory

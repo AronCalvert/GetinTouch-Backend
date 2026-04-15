@@ -26,7 +26,7 @@ import com.cs4135.Backend.repository.TimeSlotRepository;
 import com.cs4135.Backend.service.TimeSlotService;
 
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -70,7 +70,7 @@ public class TimeSlotServiceImpl implements TimeSlotService {
     return timeSlotMapper.toDtoList(entities);
   }
 
-  @Transactional
+  @Transactional(timeout = 5)
   public TimeSlotResponseDTO markSlotBooked(long slotId, String note) {
     TimeSlot slot = timeSlotRepository.findById(slotId).orElseThrow(() -> new EntityNotFoundException("TimeSlot not found!"));
 
@@ -95,7 +95,7 @@ public class TimeSlotServiceImpl implements TimeSlotService {
     return timeSlotMapper.toDto(saved);
   }
 
-  @Transactional
+  @Transactional(timeout = 5)
   public TimeSlotResponseDTO markSlotFree(long slotId) {
     TimeSlot slot = timeSlotRepository.findById(slotId).orElseThrow(() -> new RuntimeException("TimeSlot not Found!"));
     slot.setBooked(false);

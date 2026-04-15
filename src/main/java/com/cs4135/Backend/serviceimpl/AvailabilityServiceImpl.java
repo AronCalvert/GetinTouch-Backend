@@ -17,7 +17,7 @@ import com.cs4135.Backend.entity.Staff;
 import com.cs4135.Backend.entity.TimeSlot;
 import com.cs4135.Backend.service.AvailabilityService;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 
@@ -33,7 +33,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
   private final TimeSlotServiceImpl timeSlotServiceImpl;
   private final MeetingRepository meetingRepository;
 
-  @Transactional
+  @Transactional(timeout = 10)
   public List<AvailabilityResponseDTO> generateAvailability(List<AvailabilityCreationRequestDTO> dtoList,
       LocalDate date) {
     return generateSingleAvailability(dtoList, date);
@@ -71,7 +71,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
         .collect(Collectors.toList());
   }
 
-  @Transactional
+  @Transactional(timeout = 5)
   public void deleteAvailability(long id) {
     Availability availability = availabilityRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Availability not found with this id " + id));
@@ -83,7 +83,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     availabilityRepository.deleteById(id);
   }
 
-  @Transactional
+  @Transactional(timeout = 10)
   public AvailabilityResponseDTO updateAvailability(long id, AvailabilityCreationRequestDTO dto) {
     Availability availability = availabilityRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Availability not Found"));

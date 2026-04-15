@@ -8,7 +8,7 @@ import com.cs4135.Backend.mapper.MessageMapper;
 import com.cs4135.Backend.repository.*;
 import com.cs4135.Backend.service.ConversationService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class ConversationServiceImpl implements ConversationService {
     private final MessageMapper messageMapper;
 
     @Override
-    @Transactional
+    @Transactional(timeout = 5)
     public ConversationResponseDTO createOrGetConversation(Long studentId, String staffEmail) {
         Staff staff = staffRepository.findByEmail(staffEmail)
                 .orElseThrow(() -> new EntityNotFoundException("Staff not found"));
@@ -80,7 +80,7 @@ public class ConversationServiceImpl implements ConversationService {
     }
 
     @Override
-    @Transactional
+    @Transactional(timeout = 5)
     public MessageResponseDTO sendNotification(Long staffId, String studentEmail, String content) {
         Staff staff = staffRepository.findById(staffId)
                 .orElseThrow(() -> new EntityNotFoundException("Staff not found"));
@@ -105,7 +105,7 @@ public class ConversationServiceImpl implements ConversationService {
     }
 
     @Override
-    @Transactional
+    @Transactional(timeout = 5)
     public MessageResponseDTO sendMessage(Long conversationId, String content, String senderEmail) {
         Conversation conversation = conversationRepository.findById(conversationId)
                 .orElseThrow(() -> new EntityNotFoundException("Conversation not found"));

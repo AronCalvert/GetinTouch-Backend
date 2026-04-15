@@ -12,7 +12,7 @@ import com.cs4135.Backend.repository.StudentRepository;
 import com.cs4135.Backend.repository.TimeSlotRepository;
 import com.cs4135.Backend.service.MeetingService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class MeetingServiceImpl implements MeetingService {
     private final MeetingMapper meetingMapper;
 
     @Override
-    @Transactional
+    @Transactional(timeout = 5)
     public MeetingResponseDTO bookMeeting(BookMeetingRequestDTO dto) {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
 
@@ -68,7 +68,7 @@ public class MeetingServiceImpl implements MeetingService {
     }
 
     @Override
-    @Transactional
+    @Transactional(timeout = 5)
     public MeetingResponseDTO updateMeetingStatus(long id, String status) {
         Meeting meeting = meetingRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Meeting not found with ID: " + id));

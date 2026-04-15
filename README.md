@@ -13,16 +13,23 @@ Get In Touch is a project created for CS4135 Software Architecture in the Univer
 | Name | Roles |
 |----|----|
 [Aron Calvert](https://github.com/AronCalvert) | Backend
-[Leo O'Shea](https://github.com/VenturiVen) | Frontend, Wiki
+[Leo O'Shea](https://github.com/VenturiVen) | Frontend
 [Eric Lonergan](https://github.com/Eric1642) | Backend
 [Luke Minogue](https://github.com/LM-22347526) | Backend
 [Raid Mouras](https://github.com/RaidMouras) | Frontend
 
-## Pre-Requisites
-[To-Do]
+## Deploy Container for both Frontend and Backend
+# Pre-Requisites
+- Clone both Frontend and Backend Repositories into one folder (e.g., 'Dev/Frontend', 'Dev/Backend')
+
+# Setup
+1. Open Docker if not already open
+2. In /GetInTouch-Backend, view the Docker-compose.yml file for a list of Docker commands
+3. Change terminal directory to /GetInTouch-Backend (e.g., run: cd GetInTouch-Backend)
+4. In this directory, run 'docker compose up --build'
+5. After completion, project will have been built, the project container and images should be running inside Docker
 
 ## Run Backend servers (Spring app + Postgres)
-
 1. Ensure you are in root directory
 2. run 'docker compose up'
 

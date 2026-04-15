@@ -6,8 +6,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateAdminRequestDTO extends CreateUserRequestDTO {
+public class CreateConversationRequestDTO {
 
-  @NotNull
-  private String adminSecret;
+    @NotNull
+    private Long studentId;
 }

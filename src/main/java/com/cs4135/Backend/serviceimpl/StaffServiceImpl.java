@@ -65,4 +65,10 @@ public class StaffServiceImpl implements StaffService {
         .map(staffMapper::toStaffDTO)
         .collect(Collectors.toList());
   }
+
+  public StaffResponseDTO getStaffByEmail(long id) {
+    Staff staff = staffRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    return staffMapper.toStaffDTO(staff);
+  }
 }

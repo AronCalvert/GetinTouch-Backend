@@ -16,14 +16,19 @@ public class AvailabilityMapper {
     availability.setDay(dto.getDay());
     availability.setStartTime(dto.getStartTime());
     availability.setEndTime(dto.getEndTime());
+    availability.setEndDate(dto.getEndDate());
     return availability;
   }
 
   public AvailabilityResponseDTO toAvailabilityDTO(Availability entity, long staffId) {
+
     return new AvailabilityResponseDTO(
+        entity.getId(),
         staffId,
         entity.getDay(),
         entity.getStartTime(),
-        entity.getEndTime());
+        entity.getEndTime(),
+        entity.getEndDate());
   }
+
 }

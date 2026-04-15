@@ -15,6 +15,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -26,9 +27,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private String secretKey;
 
   @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) {
+    String path = request.getServletPath();
+
+    return path.startsWith("/auth/")
+        || path.startsWith("/error")
+        || "OPTIONS".equalsIgnoreCase(request.getMethod());
+  }
+
+  @Override
   protected void doFilterInternal(HttpServletRequest request,
       HttpServletResponse response,
       FilterChain filterChain) throws ServletException, IOException {
+
+    if (request.getMethod().equalsIgnoreCase("OPTIONS")) {
+      filterChain.doFilter(request, response);
+      return;
+    }
 
     String authHeader = request.getHeader("Authorization");
 
@@ -55,7 +70,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
       } catch (Exception e) {
-
+        SecurityContextHolder.clearContext();
       }
     }
 

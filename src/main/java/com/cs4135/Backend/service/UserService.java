@@ -8,4 +8,8 @@ public interface UserService {
   public List<UserResponseDTO> getAllUsers();
 
   public UserResponseDTO getUserById(Long id);
+
+  public UserResponseDTO getUserByEmail(String email);
+
+  public void deleteUser(Long id);
 }

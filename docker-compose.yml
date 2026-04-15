@@ -2,6 +2,9 @@
 # build and start all services
 #   docker compose up --build
 
+# rebuild only changes and start all services
+#   docker compose up -d
+
 # build only the images
 #   docker compose build
 
@@ -11,8 +14,8 @@
 # stop all services
 #   docker compose down
 
-# add --profile dev to also affect pgAdmin4 container
-# (see below)
+# stop all services and remove volumes (if you want a fresh postgresql database)
+#   docker compose down -v
 
 # Volumes are files that would not regularly be included in the image
 # But are needed for the app to run
@@ -22,9 +25,9 @@ services:
     image: postgres:15
     container_name: postgres_db
     environment:
-      POSTGRES_USER: myuser
-      POSTGRES_PASSWORD: mypassword
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
@@ -39,9 +42,17 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydb
-      SPRING_DATASOURCE_USERNAME: myuser
-      SPRING_DATASOURCE_PASSWORD: mypassword
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: ${JWT_EXPIRATION}
+      ADMIN_SECRET: ${ADMIN_SECRET}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+      LOGGING_LEVEL_ROOT: ${LOGGING_LEVEL_ROOT}
+      LOGGING_LEVEL_SPRING_SECURITY: ${LOGGING_LEVEL_SPRING_SECURITY}
+      LOGGING_LEVEL_SPRING_WEB: ${LOGGING_LEVEL_SPRING_WEB}
+      LOGGING_LEVEL_APP: ${LOGGING_LEVEL_APP}
     depends_on:
       - postgres
     networks:

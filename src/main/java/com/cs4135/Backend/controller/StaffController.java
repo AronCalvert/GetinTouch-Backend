@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StaffController {
 
-  public final StaffService staffService;
+  private final StaffService staffService;
 
   @PreAuthorize("isAuthenticated()")
   @GetMapping("/")
@@ -45,5 +45,11 @@ public class StaffController {
   @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
   public ResponseEntity<List<StaffResponseDTO>> getDepartmentStaff(@PathVariable String department) {
     return ResponseEntity.ok(staffService.getStaffForDepartment(department));
+  }
+
+  @GetMapping("/me/{id}")
+  @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+  public ResponseEntity<StaffResponseDTO> getStaffByEmail(@PathVariable long id) {
+    return ResponseEntity.ok(staffService.getStaffByEmail(id));
   }
 }

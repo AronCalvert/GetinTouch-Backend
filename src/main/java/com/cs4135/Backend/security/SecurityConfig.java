@@ -2,6 +2,7 @@ package com.cs4135.Backend.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -28,6 +29,7 @@ public class SecurityConfig {
   private final AuthenticationConfiguration authenticationConfiguration;
   private final UserDetailsService userDetailsService;
   private final AppPasswordEncoder passwordEncoder;
+  private final Environment env;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -49,7 +51,7 @@ public class SecurityConfig {
   public CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration config = new CorsConfiguration();
 
-    config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:5173"));
+    config.setAllowedOrigins(List.of(env.getProperty("ALLOWED_ORIGINS", "http://localhost")));
     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
     config.setAllowedHeaders(List.of("*"));
     config.setAllowCredentials(true);

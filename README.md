@@ -33,7 +33,4 @@ Get In Touch is a project created for CS4135 Software Architecture in the Univer
 ## Run Backend servers (Spring app + Postgres)
 1. Ensure you are in root directory
 2. run 'docker compose up'
-
-##
-
 © 2026 Aron Calvert, Leo O'Shea, Eric Lonergan, Luke Minogue, & Raid Mouras. All rights reserved.

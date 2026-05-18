@@ -1,6 +1,7 @@
 package com.cs4135.Backend.exception;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -20,6 +21,11 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(IllegalStateException.class)
   public ResponseEntity<String> handleIllegalState(IllegalStateException ex) {
     return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+  }
+
+  @ExceptionHandler(DataIntegrityViolationException.class)
+  public ResponseEntity<String> handleDataIntegrityViolation(DataIntegrityViolationException ex) {
+    return ResponseEntity.status(HttpStatus.CONFLICT).body("User already exists (email or username).");
   }
 
   @ExceptionHandler(IllegalArgumentException.class)

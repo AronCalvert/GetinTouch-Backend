@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,5 +41,12 @@ public class TimeSlotController {
     @PatchMapping("/free/{slotId}")
     public ResponseEntity<TimeSlotResponseDTO> markSlotFree(@PathVariable long slotId) {
         return ResponseEntity.ok(timeSlotService.markSlotFree(slotId));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/{slotId}")
+    public ResponseEntity<Void> deleteTimeslot(@PathVariable long slotId) {
+        timeSlotService.deleteTimeslot(slotId);
+        return ResponseEntity.noContent().build();
     }
 }

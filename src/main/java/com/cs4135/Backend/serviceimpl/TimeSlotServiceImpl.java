@@ -103,4 +103,13 @@ public class TimeSlotServiceImpl implements TimeSlotService {
     return timeSlotMapper.toDto(saved);
   }
 
+  @Transactional(timeout = 5)
+  public void deleteTimeslot(long slotId) {
+    TimeSlot slot = timeSlotRepository.findById(slotId).orElseThrow(() -> new EntityNotFoundException("TimeSlot not found!"));
+    if (slot.isBooked()) {
+      throw new IllegalStateException("Cannot delete a booked timeslot");
+    }
+    timeSlotRepository.delete(slot);
+  }
+
 }

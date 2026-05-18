@@ -9,4 +9,5 @@ public interface TimeSlotService {
     public List<TimeSlotResponseDTO> getAllTimeslots(long staffId);
     public TimeSlotResponseDTO markSlotBooked(long slotId, String note);
     public TimeSlotResponseDTO markSlotFree(long slotId);
+    public void deleteTimeslot(long slotId);
 }
